@@ -11,7 +11,10 @@ const harsh = {
    * @param  {Number} base radix base, 16 through 36 allowed
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
    */
-  hash (ids = [this._id], n = this._n, base = this._base) {
+  hash (ids, n, base) {
+    ids = ids || [this._id]
+    n = n || this._n
+    base = base || this._base
     try {
       if (!ids.splice) {
         throw new TypeError('The ids argument should be an array of numbers')
@@ -62,7 +65,8 @@ const harsh = {
    * @param  {base} base     radix base, 16 through 36 allowed
    * @return {Array}          list of reversed hashes
    */
-  revarse (hashes, salts, base = this._base) {
+  revarse (hashes, salts, base) {
+    base = base || this._base
     try {
       if (!hashes.splice) {
         throw new TypeError('The hashes argument should be an array of hashes provided by the hash method')

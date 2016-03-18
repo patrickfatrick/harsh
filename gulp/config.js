@@ -25,6 +25,6 @@ module.exports = {
     extensions: ['js', 'es6']
   },
   lint: {
-    src: src + '/src/**/*.js'
+    src: src + '/index.js'
   }
 }

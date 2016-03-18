@@ -14,11 +14,10 @@ var harsh = {
    * @param  {Number} base radix base, 16 through 36 allowed
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
    */
-  hash: function hash() {
-    var ids = arguments.length <= 0 || arguments[0] === undefined ? [this._id] : arguments[0];
-    var n = arguments.length <= 1 || arguments[1] === undefined ? this._n : arguments[1];
-    var base = arguments.length <= 2 || arguments[2] === undefined ? this._base : arguments[2];
-
+  hash: function hash(ids, n, base) {
+    ids = ids || [this._id];
+    n = n || this._n;
+    base = base || this._base;
     try {
       var _ret = function () {
         if (!ids.splice) {
@@ -76,9 +75,8 @@ var harsh = {
    * @param  {base} base     radix base, 16 through 36 allowed
    * @return {Array}          list of reversed hashes
    */
-  revarse: function revarse(hashes, salts) {
-    var base = arguments.length <= 2 || arguments[2] === undefined ? this._base : arguments[2];
-
+  revarse: function revarse(hashes, salts, base) {
+    base = base || this._base;
     try {
       var _ret2 = function () {
         if (!hashes.splice) {
