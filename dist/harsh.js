@@ -9,7 +9,7 @@ var harsh = {
   _n: 2,
   /**
    * Takes a number and a radix base, outputs a salted hash
-   * @param  {Array} ids   list of ids to hash   
+   * @param  {Array} ids   list of ids to hash
    * @param {Number} n number of salts to add to the hash
    * @param  {Number} base radix base, 16 through 36 allowed
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them

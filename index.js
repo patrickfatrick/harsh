@@ -6,7 +6,7 @@ const harsh = {
   _n: 2,
   /**
    * Takes a number and a radix base, outputs a salted hash
-   * @param  {Array} ids   list of ids to hash   
+   * @param  {Array} ids   list of ids to hash
    * @param {Number} n number of salts to add to the hash
    * @param  {Number} base radix base, 16 through 36 allowed
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
@@ -22,14 +22,14 @@ const harsh = {
       if (typeof base !== 'number' || base < 16 || base > 36) {
         throw new TypeError('The base should be a number between 16 and 36')
       }
-      
+
       // Create the salts. This will be the same for all hashes
       let salts = []
       for (let i = 0; i < n; i++) {
         salts.push(Math.floor(Math.random() * Math.pow(10, 6)).toString(base))
       }
 
-      // Combine the salts and the actual 
+      // Combine the salts and the actual
       let hashes = ids.map((id) => {
         if (typeof id !== 'number') {
           throw new TypeError('The ids you\'re hashing should only be numbers')
@@ -50,7 +50,7 @@ const harsh = {
         hashes: hashes,
         salts: salts,
         base: base
-      } 
+      }
     } catch (e) {
       console.error(e.name, e.message)
     }
@@ -74,7 +74,7 @@ const harsh = {
         throw new TypeError('The base should be a number between 16 and 36')
       }
       const re = new RegExp(salts.join('\|'), 'g')
-      
+
       let reversed = hashes.map((hash) => {
         if (typeof hash !== 'string') {
           throw new TypeError('The hashes you\'re reversing should only be strings')
