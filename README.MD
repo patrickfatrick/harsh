@@ -14,6 +14,8 @@ _A number-hash ready to go for Talk Like A Pirate Day._
 
 Harsh is a tiny library for tokenizing lists of numbers, and then subsequently reversing those tokens back to the original numbers. You can also create a token from nothing by calling it with no arguments.
 
+**NOTE: This library should never be used for serious encryption. It is strictly a tokenizer.**
+
 ## Install
 
 ```bash
@@ -61,7 +63,7 @@ base: 16 // the base used for tokenization
 
 If you want to eventually reverse tokens back to the original numbers you will need to store this object somewhere, or at least the salts (assuming you're consistent with the base).
 
-#### Reversing
+#### Reversing / Revarsing
 
 Reversing works very similarly, the format is
 
