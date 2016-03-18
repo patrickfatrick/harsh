@@ -32,6 +32,7 @@ Harsh basically stringifies the numbers you feed it, and appends randomly genera
 
 ```
 harsh.hash([number array[, number of salts[, base]]])
+// number array defaults to an array containing one random number
 // number of salts defaults to 2,
 // base defaults to 36
 ```
@@ -63,6 +64,28 @@ base: 16 // the base used for tokenization
 
 If you want to eventually reverse tokens back to the original numbers you will need to store this object somewhere, or at least the salts (assuming you're consistent with the base).
 
+#### Creating a 'bunch'
+
+To create a specified number of random tokens, use `harsh.bunch()`. Instead of an array of numbers as the first argument `bunch` accepts a number, and will create that many tokens based on random numbers.
+
+```
+harsh.bunch([number of tokens[, number of salts[, base]]])
+// number of tokens defaults to 1
+// number of salts defaults to 2,
+// base defaults to 36
+```
+
+For example,
+
+```javascript
+harsh.bunch() // Creates one token
+harsh.bunch(5) // Creates five tokens
+harsh.bunch(5, 3) // Creates five tokens with three salts appended to each one
+harsh.bunch(5, 3, 16) // Creates five tokens with three salts, and using base-16 (hexadecimal)
+```
+
+This method returns an object with all the same properties as `hash()`.
+
 #### Reversing / Revarsing
 
 Reversing works very similarly, the format is
@@ -87,10 +110,6 @@ The base and salts must match the original hashing, or this will not work.
 $ npm install
 $ npm test
 ```
-
-## What's the plan
-
-- Include a way to create a certain number of random tokens
 
 ## License
 

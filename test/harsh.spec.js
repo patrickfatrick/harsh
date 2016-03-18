@@ -8,7 +8,8 @@ describe('harsh', () => {
     assert.isObject(harsh)
     assert.strictEqual(harsh._base, 36)
     assert.strictEqual(harsh._n, 2)
-    assert.isNumber(harsh._id)
+    assert.strictEqual(harsh._num, 1)
+    assert.isArray(harsh._ids)
     assert.isFunction(harsh.hash)
     assert.isFunction(harsh.revarse)
   })
@@ -61,6 +62,52 @@ describe('harsh', () => {
       const re = new RegExp(`${(123).toString(36)}`)
       assert.match(harsh.hash([123]).hashes[0], re)
       assert.operator(harsh.hash([123]).hashes[0].length, '>', (123).toString(36).length)
+    })
+  })
+  describe('bunch', () => {
+    it('accepts no args if desired', () => {
+      const bunch = harsh.bunch()
+      assert.isObject(bunch)
+      assert.isOk(bunch)
+      assert.lengthOf(bunch.ids, 1)
+      assert.lengthOf(bunch.hashes, 1)
+      assert.lengthOf(bunch.salts, 2)
+      assert.strictEqual(bunch.base, 36)
+    })
+    it('returns undefined if invalid arguments', () => {
+      assert.isNotOk(harsh.bunch([123]))
+      assert.isNotOk(harsh.bunch(1, 'a'))
+      assert.isNotOk(harsh.bunch(1, 2, 15))
+      assert.isNotOk(harsh.bunch(1, 2, 37))
+      assert.isOk(harsh.bunch(1, 2, 36))
+    })
+    it('returns the same number of hashes as ids', () => {
+      assert.lengthOf(harsh.bunch().hashes, 1)
+      let ids = 1
+      assert.lengthOf(harsh.bunch(ids).hashes, 1)
+      ids = 2
+      assert.lengthOf(harsh.bunch(ids).hashes, 2)
+      ids = 3
+      assert.lengthOf(harsh.bunch(ids).hashes, 3)
+    })
+    it('returns the same number of salts as specified', () => {
+      assert.lengthOf(harsh.bunch().salts, 2)
+      assert.lengthOf(harsh.bunch(1).salts, 2)
+      assert.lengthOf(harsh.bunch(1, 1).salts, 1)
+      assert.lengthOf(harsh.bunch(1, 2).salts, 2)
+    })
+    it('returns the same base as specified', () => {
+      assert.strictEqual(harsh.bunch().base, 36)
+      assert.strictEqual(harsh.bunch(1, 2).base, 36)
+      assert.strictEqual(harsh.bunch(1, 1, 36).base, 36)
+      assert.strictEqual(harsh.bunch(1, 2, 16).base, 16)
+    })
+    it('creates a stringified version of the ids', () => {
+      assert.isString(harsh.bunch(1).hashes[0])
+      assert.isString(harsh.bunch(2).hashes[1])
+    })
+    it('adds salts to the stringified id', () => {
+      assert.operator(harsh.bunch(1).hashes[0].length, '>', (99).toString(36).length)
     })
   })
   describe('revarse', () => {
