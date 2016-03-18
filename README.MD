@@ -9,3 +9,10 @@ _A number-hash ready to go for Talk Like A Pirate Day._
 [![MIT License][license-image]][license-url]
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+## License
+
+Harsh is freely distributable under the terms of the [MIT license](./LICENSE).
+
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE
