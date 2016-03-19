@@ -121,13 +121,13 @@ const harsh = {
    * @param  {base} base     radix base, 16 through 36 allowed
    * @return {Array}          list of reversed hashes
    */
-  revarse (hashes, salts, base) {
+  reverse (hashes, salts, base) {
     base = base || this._base
     try {
       if (!hashes.splice) {
         throw new TypeError('The hashes argument should be an array of hashes provided by the hash method')
       }
-      if (!hashes.splice) {
+      if (!salts.splice) {
         throw new TypeError('The salts argument should be an array of salt strings provided by the hash method')
       }
       if (typeof base !== 'number' || base < 16 || base > 36) {

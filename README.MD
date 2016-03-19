@@ -86,19 +86,19 @@ harsh.bunch(5, 3, 16) // Creates five tokens with three salts, and using base-16
 
 This method returns an object with all the same properties as `hash()`.
 
-#### Reversing / Revarsing
+#### Reversing
 
 Reversing works very similarly, the format is
 
 ```
-harsh.revarse([token array[, salts array[, base]]])
+harsh.reverse([token array[, salts array[, base]]])
 // base defaults to 36
 ```
 
 So to reverse the first token from before, 
 
 ```javascript
-harsh.revarse(['55e8a353c53b8124d2'], ['55e8a', '353c5', '3b812'], 16)
+harsh.reverse(['55e8a353c53b8124d2'], ['55e8a', '353c5', '3b812'], 16)
 // [1234] Note this also returns an array.
 ```
 
