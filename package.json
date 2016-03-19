@@ -1,6 +1,6 @@
 {
   "name": "harsh",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A number-hash ready to go for Talk Like A Pirate Day",
   "main": "index.js",
   "scripts": {
