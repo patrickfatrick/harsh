@@ -61,6 +61,7 @@ test('creates a stringified version of the ids', (t) => {
   t.true(typeof harsh.bunch(1).hashes[0] === 'string')
   t.true(typeof harsh.bunch(2).hashes[1] === 'string')
 })
+
 test('adds salts to the stringified id', (t) => {
   t.true(harsh.bunch(1).hashes[0].length > (99).toString(36).length)
 })

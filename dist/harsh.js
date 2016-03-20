@@ -106,7 +106,7 @@ var harsh = {
         // Create the ids
         var ids = [];
         for (var i = 0; i < num; i++) {
-          ids.push(Math.floor(Math.random() * Math.pow(10, num.toString(10).length + 1)));
+          ids.push(Math.floor(Math.random() * Math.pow(10, num.toString(10).length + 2)));
         }
 
         // Create the salts. This will be the same for all hashes

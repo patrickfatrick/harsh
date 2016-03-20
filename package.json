@@ -1,6 +1,6 @@
 {
   "name": "harsh",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A number-hash ready to go for Talk Like A Pirate Day",
   "main": "index.js",
   "scripts": {
@@ -43,5 +43,8 @@
     "standard": "^6.0.7",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "ava": {
+    "babel": "inherit"
   }
 }
