@@ -21,10 +21,6 @@ const createHash = (id, salts, base) => {
 }
 
 const harsh = {
-  _base: 36,
-  _ids: [Math.floor(Math.random() * 100)],
-  _n: 2,
-  _num: 1,
   /**
    * Takes a number and a radix base, outputs a salted hash
    * @param  {Array} ids   list of ids to hash
@@ -33,9 +29,9 @@ const harsh = {
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
    */
   hash (ids, n, base) {
-    ids = ids || this._ids
-    n = n || this._n
-    base = base || this._base
+    ids = ids || [Math.floor(Math.random() * 100)]
+    n = n || 2
+    base = base || 36
     try {
       if (!ids.splice) {
         throw new TypeError('The ids argument should be an array of numbers')
@@ -76,9 +72,9 @@ const harsh = {
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
    */
   bunch (num, n, base) {
-    num = num || this._num
-    n = n || this._n
-    base = base || this._base
+    num = num || 1
+    n = n || 2
+    base = base || 36
     try {
       if (typeof num !== 'number') {
         throw new TypeError('The num should be a number')
@@ -122,7 +118,7 @@ const harsh = {
    * @return {Array}          list of reversed hashes
    */
   reverse (hashes, salts, base) {
-    base = base || this._base
+    base = base || 36
     try {
       if (!hashes.splice) {
         throw new TypeError('The hashes argument should be an array of hashes provided by the hash method')

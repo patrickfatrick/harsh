@@ -1,5 +1,5 @@
 import test from 'ava'
-import harsh from '../index'
+import { hash, reverse } from '../index'
 
 let consoleErrorClone
 
@@ -16,31 +16,31 @@ test.afterEach((t) => {
 })
 
 test('throws TypeErrors if invalid arguments', (t) => {
-  const hash = harsh.hash([123])
+  const h = hash([123])
 
-  t.throws(harsh.reverse(), TypeError)
-  t.throws(harsh.reverse(hash), TypeError)
-  t.throws(harsh.reverse([123], hash.salts), TypeError)
-  t.throws(harsh.reverse(hash.hashes, 'a'), TypeError)
-  t.throws(harsh.reverse(hash.hashes, hash.salts, 37), TypeError)
-  t.throws(harsh.reverse(hash.hashes, hash.salts, 15), TypeError)
-  t.ok(harsh.reverse(hash.hashes, hash.salts, hash.base))
+  t.throws(reverse(), TypeError)
+  t.throws(reverse(h), TypeError)
+  t.throws(reverse([123], h.salts), TypeError)
+  t.throws(reverse(h.hashes, 'a'), TypeError)
+  t.throws(reverse(h.hashes, h.salts, 37), TypeError)
+  t.throws(reverse(h.hashes, h.salts, 15), TypeError)
+  t.ok(reverse(h.hashes, h.salts, h.base))
 })
 
 test('reverses a hash back to its id', (t) => {
-  const hash = harsh.hash([123])
+  const h = hash([123])
 
-  t.same(harsh.reverse(hash.hashes, hash.salts), hash.ids)
+  t.same(reverse(h.hashes, h.salts), h.ids)
 })
 test('reverses multiple hashes back to their id', (t) => {
-  const hash = harsh.hash([1, 12, 123])
+  const h = hash([1, 12, 123])
 
-  t.same(harsh.reverse(hash.hashes, hash.salts), hash.ids)
+  t.same(reverse(h.hashes, h.salts), h.ids)
 })
 test('requires a matching base', (t) => {
-  const hash = harsh.hash([123, 1234, 12345])
+  const h = hash([123, 1234, 12345])
 
-  t.not(harsh.reverse(hash.hashes, hash.salts, 16)[0], hash.ids[0])
-  t.not(harsh.reverse(hash.hashes, hash.salts, 16)[1], hash.ids[1])
-  t.not(harsh.reverse(hash.hashes, hash.salts, 16)[2], hash.ids[2])
+  t.not(reverse(h.hashes, h.salts, 16)[0], h.ids[0])
+  t.not(reverse(h.hashes, h.salts, 16)[1], h.ids[1])
+  t.not(reverse(h.hashes, h.salts, 16)[2], h.ids[2])
 })
