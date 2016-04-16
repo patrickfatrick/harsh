@@ -26,10 +26,6 @@ var createHash = function createHash(id, salts, base) {
 };
 
 var harsh = {
-  _base: 36,
-  _ids: [Math.floor(Math.random() * 100)],
-  _n: 2,
-  _num: 1,
   /**
    * Takes a number and a radix base, outputs a salted hash
    * @param  {Array} ids   list of ids to hash
@@ -37,10 +33,11 @@ var harsh = {
    * @param  {Number} base radix base, 16 through 36 allowed
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
    */
+
   hash: function hash(ids, n, base) {
-    ids = ids || this._ids;
-    n = n || this._n;
-    base = base || this._base;
+    ids = ids || [Math.floor(Math.random() * 100)];
+    n = n || 2;
+    base = base || 36;
     try {
       var _ret = function () {
         if (!ids.splice) {
@@ -88,9 +85,9 @@ var harsh = {
    * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
    */
   bunch: function bunch(num, n, base) {
-    num = num || this._num;
-    n = n || this._n;
-    base = base || this._base;
+    num = num || 1;
+    n = n || 2;
+    base = base || 36;
     try {
       var _ret2 = function () {
         if (typeof num !== 'number') {
@@ -141,7 +138,7 @@ var harsh = {
    * @return {Array}          list of reversed hashes
    */
   reverse: function reverse(hashes, salts, base) {
-    base = base || this._base;
+    base = base || 36;
     try {
       var _ret3 = function () {
         if (!hashes.splice) {
