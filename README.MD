@@ -16,6 +16,12 @@ Harsh is a tiny library for tokenizing lists of numbers, and then subsequently r
 
 **NOTE: This library should never be used for serious encryption. It is strictly a tokenizer.**
 
+## Changelog
+
+#### v1.2.2
+
+All functions have been made free-standing so you can now import them individually, `import { hash } from 'harsh'`, etc.
+
 ## Install
 
 ```bash
