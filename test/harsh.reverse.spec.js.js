@@ -24,18 +24,18 @@ test('throws TypeErrors if invalid arguments', (t) => {
   t.throws(reverse(h.hashes, 'a'), TypeError)
   t.throws(reverse(h.hashes, h.salts, 37), TypeError)
   t.throws(reverse(h.hashes, h.salts, 15), TypeError)
-  t.ok(reverse(h.hashes, h.salts, h.base))
+  t.truthy(reverse(h.hashes, h.salts, h.base))
 })
 
 test('reverses a hash back to its id', (t) => {
   const h = hash([123])
 
-  t.same(reverse(h.hashes, h.salts), h.ids)
+  t.deepEqual(reverse(h.hashes, h.salts), h.ids)
 })
 test('reverses multiple hashes back to their id', (t) => {
   const h = hash([1, 12, 123])
 
-  t.same(reverse(h.hashes, h.salts), h.ids)
+  t.deepEqual(reverse(h.hashes, h.salts), h.ids)
 })
 test('requires a matching base', (t) => {
   const h = hash([123, 1234, 12345])

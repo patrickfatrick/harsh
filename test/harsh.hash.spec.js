@@ -18,11 +18,11 @@ test.afterEach((t) => {
 test('accepts no args if desired', (t) => {
   const h = hash()
   t.true(typeof h === 'object')
-  t.ok(h)
-  t.same(h.ids.length, 1)
-  t.same(h.hashes.length, 1)
-  t.same(h.salts.length, 2)
-  t.same(h.base, 36)
+  t.truthy(h)
+  t.deepEqual(h.ids.length, 1)
+  t.deepEqual(h.hashes.length, 1)
+  t.deepEqual(h.salts.length, 2)
+  t.deepEqual(h.base, 36)
 })
 
 test('throws TypeErrors if invalid arguments', (t) => {
@@ -31,31 +31,31 @@ test('throws TypeErrors if invalid arguments', (t) => {
   t.throws(hash([123], 'a'), TypeError)
   t.throws(hash([123], 2, 15), TypeError)
   t.throws(hash([123], 2, 37), TypeError)
-  t.ok(hash([123], 2, 36))
+  t.truthy(hash([123], 2, 36))
 })
 
 test('returns the same number of hashes as ids', (t) => {
-  t.same(hash().hashes.length, 1)
+  t.deepEqual(hash().hashes.length, 1)
   let ids = [1]
-  t.same(hash(ids).hashes.length, 1)
+  t.deepEqual(hash(ids).hashes.length, 1)
   ids.push(12)
-  t.same(hash(ids).hashes.length, 2)
+  t.deepEqual(hash(ids).hashes.length, 2)
   ids.push(123)
-  t.same(hash(ids).hashes.length, 3)
+  t.deepEqual(hash(ids).hashes.length, 3)
 })
 
 test('returns the same number of salts as specified', (t) => {
-  t.same(hash().salts.length, 2)
-  t.same(hash([123]).salts.length, 2)
-  t.same(hash([123], 1).salts.length, 1)
-  t.same(hash([123], 2).salts.length, 2)
+  t.deepEqual(hash().salts.length, 2)
+  t.deepEqual(hash([123]).salts.length, 2)
+  t.deepEqual(hash([123], 1).salts.length, 1)
+  t.deepEqual(hash([123], 2).salts.length, 2)
 })
 
 test('returns the same base as specified', (t) => {
-  t.same(hash().base, 36)
-  t.same(hash([123], 2).base, 36)
-  t.same(hash([123], 1, 36).base, 36)
-  t.same(hash([123], 2, 16).base, 16)
+  t.deepEqual(hash().base, 36)
+  t.deepEqual(hash([123], 2).base, 36)
+  t.deepEqual(hash([123], 1, 36).base, 36)
+  t.deepEqual(hash([123], 2, 16).base, 16)
 })
 
 test('creates a stringified version of the ids', (t) => {
