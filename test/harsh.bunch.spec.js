@@ -1,20 +1,6 @@
 import test from 'ava'
 import { bunch } from '../index'
 
-let consoleErrorClone
-
-test.beforeEach((t) => {
-  consoleErrorClone = console.error
-
-  console.error = (msg) => {
-    return msg
-  }
-})
-
-test.afterEach((t) => {
-  console.error = consoleErrorClone
-})
-
 test('accepts no args if desired', (t) => {
   const b = bunch()
   t.true(typeof b === 'object')
@@ -26,10 +12,10 @@ test('accepts no args if desired', (t) => {
 })
 
 test('throws TypeErrors if invalid arguments', (t) => {
-  t.throws(bunch([123]), TypeError)
-  t.throws(bunch(1, 'a'), TypeError)
-  t.throws(bunch(1, 2, 15), TypeError)
-  t.throws(bunch(1, 2, 37), TypeError)
+  t.throws(() => bunch([123]), 'The num should be a number')
+  t.throws(() => bunch(1, 'a'), 'The number of salts should be a positive integer')
+  t.throws(() => bunch(1, 2, 15), 'The base should be a number between 16 and 36')
+  t.throws(() => bunch(1, 2, 37), 'The base should be a number between 16 and 36')
   t.truthy(bunch(1, 2, 36))
 })
 

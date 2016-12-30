@@ -1,6 +1,6 @@
 {
   "name": "harsh",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "A number-hash ready to go for Talk Like A Pirate Day",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/patrickfatrick/harsh#readme",
   "devDependencies": {
-    "ava": "^0.14.0",
+    "ava": "^0.17.0",
     "babel": "^6.5.2",
     "babel-preset-es2015": "^6.5.0",
     "babelify": "^7.2.0",
@@ -34,12 +34,12 @@
     "faucet": "0.0.1",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-standard": "^6.0.5",
-    "gulp-uglify": "^1.5.3",
+    "gulp-standard": "^8.0.3",
+    "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
-    "nyc": "^6.1.1",
+    "nyc": "^10.0.0",
     "require-dir": "^0.3.0",
-    "standard": "^6.0.7",
+    "standard": "^8.6.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },

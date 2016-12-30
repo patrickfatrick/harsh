@@ -18,6 +18,10 @@ Harsh is a tiny library for tokenizing lists of numbers, and then subsequently r
 
 ## Changelog
 
+#### v1.3
+
+Added a new method `hashish` which just returns a single token (no object), to simplify the API for this scenario when you just need to create a single random token.
+
 #### v1.2.2
 
 All functions have been made free-standing so you can now import them individually, `import { hash } from 'harsh'`, etc.
@@ -69,6 +73,14 @@ base: 16 // the base used for tokenization
 ```
 
 If you want to eventually reverse tokens back to the original numbers you will need to store this object somewhere, or at least the salts (assuming you're consistent with the base).
+
+#### Hash-ish
+
+This is a very simple API to just return one token as a string (no object).
+
+```javascript
+harsh.hashish() // => 5hfda2fw79
+```
 
 #### Creating a 'bunch'
 

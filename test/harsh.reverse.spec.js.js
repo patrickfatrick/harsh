@@ -1,29 +1,14 @@
 import test from 'ava'
 import { hash, reverse } from '../index'
 
-let consoleErrorClone
-
-test.beforeEach((t) => {
-  consoleErrorClone = console.error
-
-  console.error = (msg) => {
-    return msg
-  }
-})
-
-test.afterEach((t) => {
-  console.error = consoleErrorClone
-})
-
 test('throws TypeErrors if invalid arguments', (t) => {
   const h = hash([123])
 
-  t.throws(reverse(), TypeError)
-  t.throws(reverse(h), TypeError)
-  t.throws(reverse([123], h.salts), TypeError)
-  t.throws(reverse(h.hashes, 'a'), TypeError)
-  t.throws(reverse(h.hashes, h.salts, 37), TypeError)
-  t.throws(reverse(h.hashes, h.salts, 15), TypeError)
+  t.throws(() => reverse(h), 'The hashes argument should be an array of hashes provided by the hash method')
+  t.throws(() => reverse([123], h.salts), 'The hashes you\'re reversing should only be strings')
+  t.throws(() => reverse(h.hashes, 'a'), 'The salts argument should be an array of salt strings provided by the hash method')
+  t.throws(() => reverse(h.hashes, h.salts, 37), 'The base should be a number between 16 and 36')
+  t.throws(() => reverse(h.hashes, h.salts, 15), 'The base should be a number between 16 and 36')
   t.truthy(reverse(h.hashes, h.salts, h.base))
 })
 

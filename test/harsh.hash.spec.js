@@ -1,20 +1,6 @@
 import test from 'ava'
 import { hash } from '../index'
 
-let consoleErrorClone
-
-test.beforeEach((t) => {
-  consoleErrorClone = console.error
-
-  console.error = (msg) => {
-    return msg
-  }
-})
-
-test.afterEach((t) => {
-  console.error = consoleErrorClone
-})
-
 test('accepts no args if desired', (t) => {
   const h = hash()
   t.true(typeof h === 'object')
@@ -26,11 +12,11 @@ test('accepts no args if desired', (t) => {
 })
 
 test('throws TypeErrors if invalid arguments', (t) => {
-  t.throws(hash(123), TypeError)
-  t.throws(hash(['a']), TypeError)
-  t.throws(hash([123], 'a'), TypeError)
-  t.throws(hash([123], 2, 15), TypeError)
-  t.throws(hash([123], 2, 37), TypeError)
+  t.throws(() => hash(123), 'The ids argument should be an array of numbers')
+  t.throws(() => hash(['a']), 'The ids you\'re hashing should only be numbers')
+  t.throws(() => hash([123], 'a'), 'The number of salts should be a positive integer')
+  t.throws(() => hash([123], 2, 15), 'The base should be a number between 16 and 36')
+  t.throws(() => hash([123], 2, 37), 'The base should be a number between 16 and 36')
   t.truthy(hash([123], 2, 36))
 })
 

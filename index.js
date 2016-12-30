@@ -20,7 +20,7 @@ const createHash = (id, salts, base) => {
   return hashString
 }
 
-const harsh = {
+module.exports = {
   /**
    * Takes a number and a radix base, outputs a salted hash
    * @param  {Array} ids   list of ids to hash
@@ -32,37 +32,45 @@ const harsh = {
     ids = ids || [Math.floor(Math.random() * 100)]
     n = n || 2
     base = base || 36
-    try {
-      if (!ids.splice) {
-        throw new TypeError('The ids argument should be an array of numbers')
-      }
-      if (typeof n !== 'number' || n < 0) {
-        throw new TypeError('The number of salts should be a positive integer')
-      }
-      if (typeof base !== 'number' || base < 16 || base > 36) {
-        throw new TypeError('The base should be a number between 16 and 36')
-      }
 
-      // Create the salts. This will be the same for all hashes
-      const salts = createSalts(n, base)
-
-      // Combine the salts and the actual
-      let hashes = ids.map((id) => {
-        if (typeof id !== 'number') {
-          throw new TypeError('The ids you\'re hashing should only be numbers')
-        }
-        return createHash(id, salts, base)
-      })
-
-      return {
-        ids: ids,
-        hashes: hashes,
-        salts: salts,
-        base: base
-      }
-    } catch (e) {
-      console.error(e.name, e.message)
+    if (!ids.splice) {
+      throw new TypeError('The ids argument should be an array of numbers')
     }
+    if (typeof n !== 'number' || n < 0) {
+      throw new TypeError('The number of salts should be a positive integer')
+    }
+    if (typeof base !== 'number' || base < 16 || base > 36) {
+      throw new TypeError('The base should be a number between 16 and 36')
+    }
+
+    // Create the salts. This will be the same for all hashes
+    const salts = createSalts(n, base)
+
+    // Combine the salts and the actual
+    let hashes = ids.map((id) => {
+      if (typeof id !== 'number') {
+        throw new TypeError('The ids you\'re hashing should only be numbers')
+      }
+      return createHash(id, salts, base)
+    })
+
+    return {
+      ids: ids,
+      hashes: hashes,
+      salts: salts,
+      base: base
+    }
+  },
+  /**
+   * Simplified API to just return a single token using defaults
+   * @return {String} a hash
+   */
+  hashish () {
+    return createHash(
+      [Math.floor(Math.random() * 100)],
+      createSalts(2, 36),
+      36
+    )
   },
   /**
    * Creates a specified number of random tokens
@@ -75,39 +83,36 @@ const harsh = {
     num = num || 1
     n = n || 2
     base = base || 36
-    try {
-      if (typeof num !== 'number') {
-        throw new TypeError('The num should be a number')
-      }
-      if (typeof n !== 'number' || n < 0) {
-        throw new TypeError('The number of salts should be a positive integer')
-      }
-      if (typeof base !== 'number' || base < 16 || base > 36) {
-        throw new TypeError('The base should be a number between 16 and 36')
-      }
 
-      // Create the ids
-      let ids = []
-      for (let i = 0; i < num; i++) {
-        ids.push(Math.floor(Math.random() * Math.pow(10, num.toString(10).length + 2)))
-      }
+    if (typeof num !== 'number') {
+      throw new TypeError('The num should be a number')
+    }
+    if (typeof n !== 'number' || n < 0) {
+      throw new TypeError('The number of salts should be a positive integer')
+    }
+    if (typeof base !== 'number' || base < 16 || base > 36) {
+      throw new TypeError('The base should be a number between 16 and 36')
+    }
 
-      // Create the salts. This will be the same for all hashes
-      const salts = createSalts(n, base)
+    // Create the ids
+    let ids = []
+    for (let i = 0; i < num; i++) {
+      ids.push(Math.floor(Math.random() * Math.pow(10, num.toString(10).length + 2)))
+    }
 
-      // Combine the salts and the actual
-      let hashes = ids.map((id) => {
-        return createHash(id, salts, base)
-      })
+    // Create the salts. This will be the same for all hashes
+    const salts = createSalts(n, base)
 
-      return {
-        ids: ids,
-        hashes: hashes,
-        salts: salts,
-        base: base
-      }
-    } catch (e) {
-      console.error(e.name, e.message)
+    // Combine the salts and the actual
+    let hashes = ids.map((id) => {
+      return createHash(id, salts, base)
+    })
+
+    return {
+      ids: ids,
+      hashes: hashes,
+      salts: salts,
+      base: base
     }
   },
   /**
@@ -119,30 +124,26 @@ const harsh = {
    */
   reverse (hashes, salts, base) {
     base = base || 36
-    try {
-      if (!hashes.splice) {
-        throw new TypeError('The hashes argument should be an array of hashes provided by the hash method')
-      }
-      if (!salts.splice) {
-        throw new TypeError('The salts argument should be an array of salt strings provided by the hash method')
-      }
-      if (typeof base !== 'number' || base < 16 || base > 36) {
-        throw new TypeError('The base should be a number between 16 and 36')
-      }
-      const re = new RegExp(salts.join('\|'), 'g')
 
-      let reversed = hashes.map((hash) => {
-        if (typeof hash !== 'string') {
-          throw new TypeError('The hashes you\'re reversing should only be strings')
-        }
-        let stripped = hash.replace(re, '')
-        return parseInt(stripped, base)
-      })
-      return reversed
-    } catch (e) {
-      console.error(e.name, e.message)
+    if (!hashes.splice) {
+      throw new TypeError('The hashes argument should be an array of hashes provided by the hash method')
     }
+    if (!salts.splice) {
+      throw new TypeError('The salts argument should be an array of salt strings provided by the hash method')
+    }
+    if (typeof base !== 'number' || base < 16 || base > 36) {
+      throw new TypeError('The base should be a number between 16 and 36')
+    }
+    const re = new RegExp(salts.join('\|'), 'g')
+
+    let reversed = hashes.map((hash) => {
+      if (typeof hash !== 'string') {
+        throw new TypeError('The hashes you\'re reversing should only be strings')
+      }
+      let stripped = hash.replace(re, '')
+      return parseInt(stripped, base)
+    })
+
+    return reversed
   }
 }
-
-module.exports = harsh
