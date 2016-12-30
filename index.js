@@ -134,7 +134,7 @@ module.exports = {
     if (typeof base !== 'number' || base < 16 || base > 36) {
       throw new TypeError('The base should be a number between 16 and 36')
     }
-    const re = new RegExp(salts.join('\|'), 'g')
+    const re = new RegExp(salts.join('|'), 'g')
 
     let reversed = hashes.map((hash) => {
       if (typeof hash !== 'string') {
