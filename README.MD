@@ -18,6 +18,10 @@ Harsh is a tiny library for tokenizing lists of numbers, and then subsequently r
 
 ## Changelog
 
+#### v.1.4
+
+Build process now uses Rollup, which reduces the size a bit but also makes it possible to export a native module. Dist folder now contains `harsh.js` which is the native module, `harsh.umd.js` which uses the universal module definition, capable for `<script>` and node usage, and `harsh.min.js` which is just the minified version of the umd file.
+
 #### v1.3
 
 Added a new method `hashish` which just returns a single token (no object), to simplify the API for this scenario when you just need to create a single random token.

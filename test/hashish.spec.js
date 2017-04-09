@@ -1,5 +1,5 @@
 import test from 'ava'
-import { hashish } from '../index'
+import { hashish } from '../src'
 
 test('created just a hash token', (t) => {
   const h = hashish()

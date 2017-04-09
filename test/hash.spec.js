@@ -1,5 +1,5 @@
 import test from 'ava'
-import { hash } from '../index'
+import { hash } from '../src'
 
 test('accepts no args if desired', (t) => {
   const h = hash()

@@ -1,5 +1,5 @@
 import test from 'ava'
-import { bunch } from '../index'
+import { bunch } from '../src'
 
 test('accepts no args if desired', (t) => {
   const b = bunch()

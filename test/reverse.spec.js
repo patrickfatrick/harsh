@@ -1,5 +1,5 @@
 import test from 'ava'
-import { hash, reverse } from '../index'
+import { hash, reverse } from '../src'
 
 test('throws TypeErrors if invalid arguments', (t) => {
   const h = hash([123])

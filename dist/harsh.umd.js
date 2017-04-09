@@ -1,3 +1,9 @@
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.harsh = global.harsh || {})));
+}(this, (function (exports) { 'use strict';
+
 var toConsumableArray = function (arr) {
   if (Array.isArray(arr)) {
     for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
@@ -153,4 +159,11 @@ function reverse(hashes, salts, base) {
   return reversed;
 }
 
-export { hash, hashish, bunch, reverse };
+exports.hash = hash;
+exports.hashish = hashish;
+exports.bunch = bunch;
+exports.reverse = reverse;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
