@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel'
+import babel from 'rollup-plugin-babel';
 
 export default {
   entry: 'src/index.js',
@@ -9,4 +9,4 @@ export default {
     })
   ],
   format: 'es'
-}
+};

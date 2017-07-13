@@ -35,10 +35,10 @@ function _createHash(id, salts, base) {
  * @param  {Number} base radix base, 16 through 36 allowed
  * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
  */
-function hash(ids, n, base) {
-  ids = ids || [Math.floor(Math.random() * 100)];
-  n = n || 2;
-  base = base || 36;
+function hash() {
+  var ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [Math.floor(Math.random() * 100)];
+  var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  var base = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 36;
 
   if (!ids.splice) {
     throw new TypeError('The ids argument should be an array of numbers');
@@ -74,7 +74,11 @@ function hash(ids, n, base) {
  * @return {String} a hash
  */
 function hashish() {
-  return _createHash([Math.floor(Math.random() * 100)], _createSalts(2, 36), 36);
+  var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Math.floor(Math.random() * 100);
+  var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  var base = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 36;
+
+  return _createHash(id, _createSalts(n, base), base);
 }
 
 /**
@@ -84,10 +88,10 @@ function hashish() {
  * @param  {Number} base radix base, 16 through 36 allowed
  * @return {Object}      a hash object containing the hashes as well as info needed to reverse them
  */
-function bunch(num, n, base) {
-  num = num || 1;
-  n = n || 2;
-  base = base || 36;
+function bunch() {
+  var num = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  var base = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 36;
 
   if (typeof num !== 'number') {
     throw new TypeError('The num should be a number');
@@ -128,8 +132,8 @@ function bunch(num, n, base) {
  * @param  {base} base     radix base, 16 through 36 allowed
  * @return {Array}          list of reversed hashes
  */
-function reverse(hashes, salts, base) {
-  base = base || 36;
+function reverse(hashes, salts) {
+  var base = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 36;
 
   if (!hashes.splice) {
     throw new TypeError('The hashes argument should be an array of hashes provided by the hash method');
