@@ -5,7 +5,7 @@
   "main": "dist/harsh.umd.js",
   "module": "dist/harsh.js",
   "scripts": {
-    "test": "xo './src/**/*.js' './test/**/*.js' && BABEL_ENV=development nyc --reporter=lcov --reporter=text ava --verbose",
+    "test": "xo './src/**/*.js' './test/**/*.js' && BABEL_ENV=development nyc --reporter=lcov --reporter=text ava -s --verbose test/**/*.spec.js",
     "report": "nyc report",
     "build": "xo && npm run base && npm run min && npm run umd",
     "base": "BABEL_ENV=production rollup -c 'rollup.config.base.js'",
